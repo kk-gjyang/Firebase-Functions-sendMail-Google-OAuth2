@@ -38,8 +38,8 @@ exports.sendemail = functions.https.onCall(async (data, context) => {
   oauth2Client.setCredentials({
     refresh_token: refreshToken
   });
-  const tokens = await oauth2Client.refreshAccessToken();
-  const accessToken = tokens.credentials.access_token;
+  const tokens = await oauth2Client.getAccessToken();
+  const accessToken = tokens.res.data.access_token;
 
   const smtpTransport = nodemailer.createTransport({
     service: "gmail",
